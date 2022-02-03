@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/style.css" />
 </head>
 
 <body>
@@ -10,7 +10,7 @@
             {{movie_title}} <br />
             {{movie_description}} <br />
             {{", ".join(movie_genres)}} <br />
-            {{movie_poster_url}} <br />
+            <img src="{{movie_poster_url}}" alt="{{movie_title}}">
         </p>
     </div>
 </body>
