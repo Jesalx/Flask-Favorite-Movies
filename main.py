@@ -18,7 +18,15 @@ MOVIE_IDS = [
 
 @app.route("/")
 def main():
-    return flask.render_template("index.html")
+    """
+    TODO: Ask professor if we need docstring for main function
+    """
+    movie = tmdb.get_random_favorite_movie()
+    return flask.render_template("index.html",
+                                 movie_title=movie["title"],
+                                 movie_description=movie["description"],
+                                 movie_genres=movie["genres"],
+                                 movie_poster_url=movie["poster_url"])
 
 
 app.run(debug=True)
