@@ -7,10 +7,14 @@
 <body>
     <div class="movie_title">
         <p>
-            {{movie_title}} <br />
-            {{movie_description}} <br />
+        <h1>{{movie_title}} </h1>
+        <div>
+            {{movie_description}}
+        </div> <br />
+        <div>
             {{", ".join(movie_genres)}} <br />
-            <img src="{{movie_poster_url}}" alt="{{movie_title}}">
+        </div> <br />
+        <img src="{{movie_poster_url}}" alt="{{movie_title}}">
         </p>
     </div>
 </body>
