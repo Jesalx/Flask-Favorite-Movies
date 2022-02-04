@@ -9,7 +9,8 @@ from dotenv import find_dotenv, load_dotenv
 load_dotenv(find_dotenv())
 TMDB_KEY = os.getenv("TMDB_KEY")
 BASE_URL = "https://api.themoviedb.org/3/movie/"
-POSTER_URL = "https://www.themoviedb.org/t/p/w1280"
+CONFIG_URL = "https://api.themoviedb.org/3/configuration"
+POSTER_SIZE = "original"
 query_params = {"api_key": TMDB_KEY}
 
 MOVIE_IDS = [
@@ -36,7 +37,14 @@ def get_movie_from_tmdb_id(tmdb_id):
     movie_info["title"] = movie_object["title"]
     movie_info["description"] = movie_object["overview"]
     movie_info["genres"] = [obj["name"] for obj in movie_object["genres"]]
-    movie_info["poster_url"] = POSTER_URL + movie_object["poster_path"]
+
+    # Getting Poster URL
+    poster_url_resopnse = requests.get(CONFIG_URL, params=query_params)
+    poster_base_url = poster_url_resopnse.json()["images"]["base_url"]
+    poster_url = poster_base_url + POSTER_SIZE + movie_object["poster_path"]
+    # movie_info["poster_url"] = POSTER_URL + movie_object["poster_path"]
+    movie_info["poster_url"] = poster_url
+
     return movie_info
 
 
@@ -51,9 +59,8 @@ def main():
     """
     TODO: Write docstring
     """
-
-    movie_info = get_movie_from_tmdb_id(MOVIE_IDS[0])
-    for key, val in movie_info.items():
+    movie = get_random_favorite_movie()
+    for key, val in movie.items():
         print(f"{key}: {val}")
 
 
