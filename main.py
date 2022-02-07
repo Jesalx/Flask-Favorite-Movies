@@ -24,9 +24,11 @@ def main():
     movie = tmdb.get_random_favorite_movie()
     return flask.render_template("index.html",
                                  movie_title=movie["title"],
+                                 movie_tagline=movie["tagline"],
                                  movie_description=movie["description"],
                                  movie_genres=movie["genres"],
-                                 movie_poster_url=movie["poster_url"])
+                                 movie_poster_url=movie["poster_url"],
+                                 movie_wiki_url=movie["wiki_url"])
 
 
 app.run(debug=True)
