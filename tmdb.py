@@ -1,11 +1,12 @@
 """
-TODO: Write useful module docstring here
+This module works with the TMDB API to generate useful movie information
+when provided with a TMDB movie id
 """
 import os
 import random
 import requests
-import wiki_link
 from dotenv import find_dotenv, load_dotenv
+import wiki_link
 
 load_dotenv(find_dotenv())
 TMDB_KEY = os.getenv("TMDB_KEY")
@@ -67,10 +68,7 @@ def get_random_favorite_movie():
     return get_movie_from_tmdb_id(random.choice(MOVIE_IDS))
 
 
-def main():
-    """
-    TODO: Write docstring
-    """
+def main():  # pylint: disable=missing-function-docstring
     movie = get_random_favorite_movie()
     for key, val in movie.items():
         print(f"{key}: {val}")

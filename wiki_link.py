@@ -1,3 +1,7 @@
+"""
+This module works with the Wikipedia API to find a specific movie's page id
+and also generate a working Wikipedia url from a page id
+"""
 import requests
 
 BASE_URL = "https://www.wikipedia.org/w/api.php"
@@ -27,10 +31,7 @@ def get_wiki_link(page_id):
     return WIKI_URL + str(page_id)
 
 
-def main():
-    """
-    TODO: Write docstring
-    """
+def main():  # pylint: disable=missing-function-docstring
     page_id = get_wiki_page_id("The Prestige", "2006")
     page_link = get_wiki_link(page_id)
     print(page_link)
