@@ -18,7 +18,6 @@ def get_wiki_page_id(title, release_year):
         "format": "json",
         "srsearch": f"{title} {release_year} film",
     }
-    print(query_params["srsearch"])
 
     response = requests.get(BASE_URL, params=query_params)
     return response.json()["query"]["search"][0]["pageid"]
