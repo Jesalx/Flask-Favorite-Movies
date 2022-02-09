@@ -1,5 +1,13 @@
 # Project 1
 
+This project is meant to familiarize myself with external APIs and properly set up and use technologies such as Flask, Git, Github, and Heroku.
+
+The project sets up a webpage that randomly selects a [TMDB](https://www.themoviedb.org/?language=en-US) movie id and displays a poster of that movie along with other related information. Implementing this required the use of TMDB's API which is able to provide the title, tagline, description, genres, and poster image.
+
+Another portion of the project was to generate and display a [Wikipedia](https://www.wikipedia.org) URL for the currently selected movie. Implementing this required the use of [Wikipedia's API](https://www.mediawiki.org/wiki/API:Main_page).
+
+The project is hosted on Heroku and can be found at [Project URL](https://serene-woodland-90689.herokuapp.com)
+
 ## Installation Instructions
 
 The first step to installation is going to be downloading the necessary files. If you wish to clone the repo you can do so by following [Github's documented instructions](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository). Otherwise you could download a zip of the repo and extract the contents where you would like them.
