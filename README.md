@@ -38,7 +38,8 @@ Once you have all of the packages downloaded you are able to run the app with
 
 ## Known Problems
 
-- A known issue that I still have in my project is handling movie cases where the movie doesn't provide necessary information like a tagline or description. None of the movies that I've experimented with have had an issue like this, but I've seen other people talk about this being an issue. I think that a simple solution might be to have default values for these like an empty string or something similar.
+- An issue that I'm not sure about is how I'm handling the server response in `tmdb.py`. If the app doesn't get status code 200 then it will return a bunch of pretty useless default information, but I would have to do more research to know if there are other status codes that are still viable and would have provided the relevant information.
+- An issue that I'm still not sure about is how the default values for the movie information should look. Right now I have it so the default values are clearly not movie information, but I don't know if it would be better to just hardcode the information for one movie and just set that as the default.
 
 ## Future Improvements
 
