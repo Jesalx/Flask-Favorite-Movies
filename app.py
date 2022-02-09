@@ -1,6 +1,10 @@
 """
 Project 1 - Main flask app
 Jpatel152@student.gsu.edu
+
+This file usees the Flask framework to create a flask app
+that will contain some basic information related to a randomly
+selected movie and a poster associated with the movie.
 """
 import os  # pylint: disable=unused-import
 import flask
@@ -26,6 +30,7 @@ def main():  # pylint: disable=missing-function-docstring
 # app.run(debug=True)
 
 # Uncomment following if running on Heroku and comment if running locally
-app.run(host=os.getenv('IP', '0.0.0.0'),
-        port=int(os.getenv('PORT', 8080)),
-        debug=True)
+app.run(
+    host=os.getenv('IP', '0.0.0.0'),
+    port=int(os.getenv('PORT', 8080)),  # pylint: disable=invalid-envvar-default
+    debug=True)
