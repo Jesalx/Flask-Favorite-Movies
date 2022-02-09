@@ -2,7 +2,7 @@
 Project 1 - Main flask app
 Jpatel152@student.gsu.edu
 """
-import os
+import os  # pylint: disable=unused-import
 import flask
 import tmdb
 
