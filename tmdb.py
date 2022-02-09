@@ -21,6 +21,9 @@ MOVIE_IDS = [
     335984,  # Blade Runner 2049
     13183,  # Watchmen
     496243,  # Parasite
+    245891,  # John Wick
+    7453,  # The Hitchhiker's Guide to the Galaxy
+    4935,  # Howl's Moving Castle
 ]
 
 
@@ -29,9 +32,6 @@ def get_movie_from_tmdb_id(tmdb_id):
     Returns dictionary with the following information about the movie:
     title, description, tagline, genres, poster_url, release_year, wiki_url
     """
-    # TODO: Write a way to handle the issue if the server doesn't respond
-    # TODO: Handle the cases where the movie is missing description or
-    # poster urls, or ask professor if thats even necessary.
     url = BASE_URL + str(tmdb_id)
     response = requests.get(url, params=query_params)
     movie_object = response.json()
@@ -42,12 +42,9 @@ def get_movie_from_tmdb_id(tmdb_id):
     movie_info["genres"] = [obj["name"] for obj in movie_object["genres"]]
 
     # Getting Poster URL
-    # TODO?: Maybe set a default fallback url or something if
-    # this doesn't get a good response?
     poster_url_resopnse = requests.get(CONFIG_URL, params=query_params)
     poster_base_url = poster_url_resopnse.json()["images"]["base_url"]
     poster_url = poster_base_url + POSTER_SIZE + movie_object["poster_path"]
-    # movie_info["poster_url"] = POSTER_URL + movie_object["poster_path"]
     movie_info["poster_url"] = poster_url
 
     # Getting movie release year stored in format: YEAR-MONTH-DAY
