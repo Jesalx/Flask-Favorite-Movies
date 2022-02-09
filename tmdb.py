@@ -24,7 +24,18 @@ MOVIE_IDS = [
     245891,  # John Wick
     7453,  # The Hitchhiker's Guide to the Galaxy
     4935,  # Howl's Moving Castle
+    98,  # Gladiator
 ]
+
+FALLBACK_MOVIE = {
+    "title": "No title",
+    "description": "No description",
+    "tagline": "No tagline",
+    "genres": "No genres",
+    "poster_url": "",
+    "release_year": "No release year",
+    "wiki_url": "",
+}
 
 
 def get_movie_from_tmdb_id(tmdb_id):
@@ -34,8 +45,14 @@ def get_movie_from_tmdb_id(tmdb_id):
     """
     url = BASE_URL + str(tmdb_id)
     response = requests.get(url, params=query_params)
+
+    # Idea for using the status code from https://stackoverflow.com/a/15258759
+    if response.status_code != 200:
+        return FALLBACK_MOVIE
+    print(response.status_code)
+
     movie_object = response.json()
-    movie_info = dict()
+    movie_info = FALLBACK_MOVIE.copy()
     movie_info["title"] = movie_object["title"]
     movie_info["description"] = movie_object["overview"]
     movie_info["tagline"] = movie_object["tagline"]
