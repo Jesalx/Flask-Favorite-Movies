@@ -19,7 +19,13 @@ def get_wiki_page_id(title, release_year):
         "srsearch": f"{title} {release_year} film",
     }
 
-    response = requests.get(BASE_URL, params=query_params)
+    try:
+        response = requests.get(BASE_URL, params=query_params)
+    except requests.exceptions.RequestException:
+        # This ends up returning https://en.wikipedia.org/?curid=0 which is a
+        # 'bad title' page at Wikipedia.
+        return 0
+
     return response.json()["query"]["search"][0]["pageid"]
 
 

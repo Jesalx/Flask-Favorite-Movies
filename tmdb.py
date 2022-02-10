@@ -44,12 +44,14 @@ def get_movie_from_tmdb_id(tmdb_id):
     title, description, tagline, genres, poster_url, release_year, wiki_url
     """
     url = BASE_URL + str(tmdb_id)
-    response = requests.get(url, params=query_params)
+    try:
+        response = requests.get(url, params=query_params)
+    except requests.exceptions.RequestException:
+        return FALLBACK_MOVIE
 
     # Idea for using the status code from https://stackoverflow.com/a/15258759
     if response.status_code != 200:
         return FALLBACK_MOVIE
-    print(response.status_code)
 
     movie_object = response.json()
     movie_info = FALLBACK_MOVIE.copy()
