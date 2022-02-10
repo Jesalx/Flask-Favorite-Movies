@@ -56,18 +56,18 @@ def get_movie_from_tmdb_id(tmdb_id):
     movie_info["title"] = movie_object["title"]
     movie_info["description"] = movie_object["overview"]
     movie_info["tagline"] = movie_object["tagline"]
-    movie_info["genres"] = [obj["name"] for obj in movie_object["genres"]]
+    movie_info["genres"] = [genre["name"] for genre in movie_object["genres"]]
 
     # Getting Poster URL
-    poster_url_resopnse = requests.get(CONFIG_URL, params=query_params)
-    poster_base_url = poster_url_resopnse.json()["images"]["base_url"]
+    poster_url_response = requests.get(CONFIG_URL, params=query_params)
+    poster_base_url = poster_url_response.json()["images"]["base_url"]
     poster_url = poster_base_url + POSTER_SIZE + movie_object["poster_path"]
     movie_info["poster_url"] = poster_url
 
     # Getting movie release year stored in format: YEAR-MONTH-DAY
     movie_info["release_year"] = movie_object["release_date"].split("-")[0]
 
-    # Getting Wikipeida link for movie
+    # Getting Wikipedia link for movie
     movie_page_id = wiki_link.get_wiki_page_id(movie_info["title"],
                                                movie_info["release_year"])
     movie_info["wiki_url"] = wiki_link.get_wiki_link(movie_page_id)
