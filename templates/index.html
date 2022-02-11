@@ -5,20 +5,22 @@
 </head>
 
 <body>
-    <div class="movie_title">
+    <div>
         <p>
-        <h1>{{movie_title}} </h1>
-        <div>
+        <div class="movie_title">
+            <h1>{{movie_title}} </h1>
+        </div>
+        <div class="movie_tagline">
             {{movie_tagline}}
         </div> <br />
-        <div>
+        <div class="movie_description">
             {{movie_description}}
         </div> <br />
-        <div>
+        <div class="movie_genres">
             {{", ".join(movie_genres)}} <br />
         </div> <br />
-        <img src="{{movie_poster_url}}" alt="{{movie_title}}">
-        <div>
+        <div class="movie_poster_img"><img src="{{movie_poster_url}}" alt="{{movie_title}}"></div>
+        <div class="movie_wiki_url">
             <a href="{{movie_wiki_url}}">{{movie_wiki_url}}</a>
         </div>
         </p>
