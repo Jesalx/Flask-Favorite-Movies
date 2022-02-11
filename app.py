@@ -26,10 +26,8 @@ def main():  # pylint: disable=missing-function-docstring
                                  movie_wiki_url=movie["wiki_url"])
 
 
-# Uncomment following if running locally and comment if running on Heroku
-# app.run(debug=True)
-
-# Uncomment following if running on Heroku and comment if running locally
+# The following runs for me locally, but if there are issues you can
+# also try: "app.run(debug=True)" without the host and port parameters
 app.run(
     host=os.getenv('IP', '0.0.0.0'),
     port=int(os.getenv('PORT', 8080)),  # pylint: disable=invalid-envvar-default
