@@ -23,13 +23,28 @@ function meetsSignupConditions() {
         return false;
     }
 
+    if (username.length > 128) {
+        err_msg.innerText = "Username must be 128 or less characters."
+        return false;
+    }
+
     if (password.length <= 4) {
         err_msg.innerText = "Password must be 5 or more characters."
         return false;
     }
 
+    if (password.length > 128) {
+        err_msg.innerText = "Password must be 128 or less characters."
+        return false;
+    }
+
     if (password !== repassword) {
         err_msg.innerText = "Passwords must match."
+        return false;
+    }
+
+    if (username === password) {
+        err_msg.innerText = "Username and password must not match."
         return false;
     }
 
