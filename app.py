@@ -58,7 +58,6 @@ def main():  # pylint: disable=missing-function-docstring
 
 @app.route("/signup", methods=["GET"])
 def signup():
-    # TODO: Create a method of stopping empty password signups and logins
     return flask.render_template("signup.html")
 
 
@@ -66,10 +65,6 @@ def signup():
 def signup_post():
     username = flask.request.form.get("username").lower()
     password = flask.request.form.get("password")
-    repassword = flask.request.form.get("repassword")
-    if password != repassword:
-        flask.flash("Passwords must match.")
-        return flask.redirect("/signup")
 
     user = User.query.filter_by(username=username).first()
 
