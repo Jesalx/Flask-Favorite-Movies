@@ -70,8 +70,9 @@ def get_movie_from_tmdb_id(tmdb_id):
     movie_info["release_year"] = movie_object["release_date"].split("-")[0]
 
     # Getting Wikipedia link for movie
-    movie_page_id = wiki_link.get_wiki_page_id(movie_info["title"],
-                                               movie_info["release_year"])
+    movie_page_id = wiki_link.get_wiki_page_id(
+        movie_info["title"], movie_info["release_year"]
+    )
     movie_info["wiki_url"] = wiki_link.get_wiki_link(movie_page_id)
 
     return movie_info
