@@ -23,8 +23,8 @@ function meetsSignupConditions() {
         return false;
     }
 
-    if (username.length > 128) {
-        err_msg.innerText = "Username must be 128 or less characters."
+    if (username.length > 32) {
+        err_msg.innerText = "Username must be 32 or less characters."
         return false;
     }
 

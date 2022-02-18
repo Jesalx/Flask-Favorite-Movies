@@ -5,7 +5,11 @@
 </head>
 
 <body>
-    <div>
+    <ul class="navbar">
+        <li><a class="navbar_item" href="{{ url_for('logout')}}">Logout</a></li>
+        <li><a class="navbar_item username" href="">{{username}}</a></li>
+    </ul>
+    <div class="main">
         <p>
         <div class="movie_title">
             <h1>{{movie_title}} </h1>

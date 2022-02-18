@@ -47,6 +47,7 @@ def main():  # pylint: disable=missing-function-docstring
     movie = tmdb.get_random_favorite_movie()
     return flask.render_template(
         "index.html",
+        username=current_user.username,
         movie_title=movie["title"],
         movie_tagline=movie["tagline"],
         movie_description=movie["description"],

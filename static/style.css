@@ -1,8 +1,35 @@
 body {
     background-color: #101b26;
     color: #f3f3f3;
-    padding: 2%;
     font-family: monospace;
+}
+
+/* How to do navbar and style from:
+https://www.w3schools.com/css/css_navbar_horizontal.asp */
+
+.navbar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar_item {
+    float: right;
+    display: block;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    border-radius: 12px;
+}
+
+.navbar_item:hover {
+    background-color: #162b3f;
+}
+
+
+
+.main {
+    padding: 2%;
 }
 
 img {
