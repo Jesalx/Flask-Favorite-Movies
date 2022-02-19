@@ -26,8 +26,6 @@ https://www.w3schools.com/css/css_navbar_horizontal.asp */
     background-color: #162b3f;
 }
 
-
-
 .main {
     padding: 2%;
 }
@@ -48,4 +46,28 @@ a {
 
 .movie_tagline, .movie_genres {
     font-style: italic;
+}
+
+.login_field {
+    width: auto;
+    padding: 6px 8px;
+    border-radius: 4px;
+
+}
+
+.login_submit {
+    background-color: white;
+    border: none;
+    width: auto;
+    padding: 6px 8px;
+    border-radius: 4px;
+}
+
+.login {
+    padding: 2%;
+}
+
+input {
+    font-family: monospace;
+    font-size: medium;
 }
