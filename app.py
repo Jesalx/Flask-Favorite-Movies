@@ -118,9 +118,15 @@ def logout():
     return flask.redirect("/login")
 
 
-@app.route("/review", methods=["POST"])
+@app.route("/review", methods=["GET"])
 @login_required
 def review():
+    return flask.redirect("/")
+
+
+@app.route("/review", methods=["POST"])
+@login_required
+def review_post():
     username = flask.request.form.get("username")
     movie_id = flask.request.form.get("movie_id")
     rating = flask.request.form.get("review_rating")
