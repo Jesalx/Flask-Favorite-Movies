@@ -52,6 +52,7 @@ def main():  # pylint: disable=missing-function-docstring
 
     return flask.render_template(
         "index.html",
+        username=current_user.username,
         movie_id=movie_info["id"],
         movie_title=movie_info["title"],
         movie_tagline=movie_info["tagline"],
