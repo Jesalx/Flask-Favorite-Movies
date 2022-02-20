@@ -18,7 +18,7 @@ from flask_login import (
 )
 from werkzeug.security import generate_password_hash, check_password_hash
 import tmdb
-from models import db, User, Movie, Review
+from models import db, Account, Movie, Review
 
 app = flask.Flask(__name__)
 app.config["SEND_FILE_MAX_AGE_DEFAULT"] = 0
@@ -38,23 +38,29 @@ login_manager.init_app(app=app)
 
 @login_manager.user_loader
 def load_user(user_id):
-    return User.query.get(int(user_id))
+    return Account.query.get(int(user_id))
 
 
 @app.route("/")
 @login_required
 def main():  # pylint: disable=missing-function-docstring
-    movie = tmdb.get_random_favorite_movie()
+    movie_info = tmdb.get_random_favorite_movie()
+    movie_reviews = []
+    movie = Movie.query.filter_by(tmdb_id=movie_info["id"]).first()
+    if movie:
+        movie_reviews = movie.reviews
+
     return flask.render_template(
         "index.html",
         username=current_user.username,
-        movie_id=movie["id"],
-        movie_title=movie["title"],
-        movie_tagline=movie["tagline"],
-        movie_description=movie["description"],
-        movie_genres=movie["genres"],
-        movie_poster_url=movie["poster_url"],
-        movie_wiki_url=movie["wiki_url"],
+        movie_id=movie_info["id"],
+        movie_title=movie_info["title"],
+        movie_tagline=movie_info["tagline"],
+        movie_description=movie_info["description"],
+        movie_genres=movie_info["genres"],
+        movie_poster_url=movie_info["poster_url"],
+        movie_wiki_url=movie_info["wiki_url"],
+        movie_reviews=movie_reviews,
     )
 
 
@@ -68,13 +74,13 @@ def signup_post():
     username = flask.request.form.get("username").lower()
     password = flask.request.form.get("password")
 
-    user = User.query.filter_by(username=username).first()
+    user = Account.query.filter_by(username=username).first()
 
     if user:
         flask.flash("User already exists.")
         return flask.redirect("/signup")
 
-    new_user = User(
+    new_user = Account(
         username=username, password=generate_password_hash(password, method="sha256")
     )
 
@@ -95,7 +101,7 @@ def login_post():
     username = flask.request.form.get("username").lower()
     password = flask.request.form.get("password")
 
-    user = User.query.filter_by(username=username).first()
+    user = Account.query.filter_by(username=username).first()
 
     if not user or not check_password_hash(user.password, password):
         flask.flash("Incorrect username or password.")
@@ -118,10 +124,10 @@ def review():
     username = flask.request.form.get("username")
     movie_id = flask.request.form.get("movie_id")
     rating = flask.request.form.get("review_rating")
-    content = flask.request.form.get("review_content")
+    content = flask.request.form.get("review_content").strip()
 
     movie = Movie.query.filter_by(tmdb_id=movie_id).first()
-    user = User.query.filter_by(username=username).first()
+    user = Account.query.filter_by(username=username).first()
 
     if not movie:
         movie = Movie(tmdb_id=movie_id)
