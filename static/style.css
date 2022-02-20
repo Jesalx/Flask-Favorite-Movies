@@ -77,3 +77,14 @@ input, textarea {
     width: 0;
     height: 0;
 }
+
+.reviews {
+    list-style-type: none;
+    padding: 0;
+}
+
+.review_item {
+    word-wrap: break-word;
+    padding: 14px 16px;
+    max-width: 100%;
+}

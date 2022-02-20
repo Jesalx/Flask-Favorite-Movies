@@ -38,11 +38,28 @@
                 <input class="invisible_input" type="text" value="{{username}}" name="username" readonly>
                 <br>
                 <textarea class="review_field" rows="4" cols="50" id="review_content" name="review_content"
-                    placeholder="Write a review."></textarea>
+                    placeholder="Write a review." maxlength="512"></textarea>
                 <br>
                 <input class="review_submit" type="submit" value="Submit Review">
             </form>
         </div>
+
+        <br>
+        <h3>Reviews</h3>
+        {% if movie_reviews %}
+        <ul class="reviews">
+            {% for review in movie_reviews %}
+            <li class="review_item">
+                <b>{{review.username}}</b> rated the movie {{review.rating}}/10<br>
+                {% if review.content %}
+                <div class="review_content">{{review.content}}</div>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        No reviews yet. Write a review.
+        {% endif %}
     </div>
 </body>
 
