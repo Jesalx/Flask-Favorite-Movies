@@ -52,7 +52,6 @@ def main():  # pylint: disable=missing-function-docstring
 
     return flask.render_template(
         "index.html",
-        username=current_user.username,
         movie_id=movie_info["id"],
         movie_title=movie_info["title"],
         movie_tagline=movie_info["tagline"],
@@ -127,13 +126,12 @@ def review():
 @app.route("/review", methods=["POST"])
 @login_required
 def review_post():
-    username = flask.request.form.get("username")
+    username = current_user.username
     movie_id = flask.request.form.get("movie_id")
     rating = flask.request.form.get("review_rating")
     content = flask.request.form.get("review_content").strip()
 
     movie = Movie.query.filter_by(tmdb_id=movie_id).first()
-    user = Account.query.filter_by(username=username).first()
 
     if not movie:
         movie = Movie(tmdb_id=movie_id)
@@ -145,7 +143,7 @@ def review_post():
     )
 
     movie.reviews.append(review)
-    user.reviews.append(review)
+    current_user.reviews.append(review)
 
     db.session.add(review)
     db.session.commit()
