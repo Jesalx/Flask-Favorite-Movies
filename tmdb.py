@@ -28,6 +28,7 @@ MOVIE_IDS = [
 ]
 
 FALLBACK_MOVIE = {
+    "movie_id": 0,
     "title": "No title",
     "description": "No description",
     "tagline": "No tagline",
@@ -55,6 +56,7 @@ def get_movie_from_tmdb_id(tmdb_id):
 
     movie_object = response.json()
     movie_info = FALLBACK_MOVIE.copy()
+    movie_info["id"] = tmdb_id
     movie_info["title"] = movie_object["title"]
     movie_info["description"] = movie_object["overview"]
     movie_info["tagline"] = movie_object["tagline"]

@@ -28,6 +28,21 @@
             <a href="{{movie_wiki_url}}">{{movie_wiki_url}}</a>
         </div>
         </p>
+
+        <div class="review_title">
+            <h3>Write a review:</h3>
+            <form method="POST" action="/review">
+                Rating (0-10): <input type="number" class="review_field" id="review_rating" name="review_rating" min="0"
+                    max="10" value="10">
+                <input class="invisible_input" type="number" value="{{movie_id}}" name="movie_id" readonly>
+                <input class="invisible_input" type="text" value="{{username}}" name="username" readonly>
+                <br>
+                <textarea class="review_field" rows="4" cols="50" id="review_content" name="review_content"
+                    placeholder="Write a review."></textarea>
+                <br>
+                <input class="review_submit" type="submit" value="Submit Review">
+            </form>
+        </div>
     </div>
 </body>
 

@@ -18,7 +18,7 @@ from flask_login import (
 )
 from werkzeug.security import generate_password_hash, check_password_hash
 import tmdb
-from models import db, User
+from models import db, User, Movie, Review
 
 app = flask.Flask(__name__)
 app.config["SEND_FILE_MAX_AGE_DEFAULT"] = 0
@@ -48,6 +48,7 @@ def main():  # pylint: disable=missing-function-docstring
     return flask.render_template(
         "index.html",
         username=current_user.username,
+        movie_id=movie["id"],
         movie_title=movie["title"],
         movie_tagline=movie["tagline"],
         movie_description=movie["description"],
@@ -104,11 +105,40 @@ def login_post():
     return flask.redirect("/")
 
 
-@app.route("/logout")
+@app.route("/logout", methods=["GET"])
 @login_required
 def logout():
     logout_user()
     return flask.redirect("/login")
+
+
+@app.route("/review", methods=["POST"])
+@login_required
+def review():
+    username = flask.request.form.get("username")
+    movie_id = flask.request.form.get("movie_id")
+    rating = flask.request.form.get("review_rating")
+    content = flask.request.form.get("review_content")
+
+    movie = Movie.query.filter_by(tmdb_id=movie_id).first()
+    user = User.query.filter_by(username=username).first()
+
+    if not movie:
+        movie = Movie(tmdb_id=movie_id)
+        db.session.add(movie)
+        db.session.commit()
+
+    review = Review(
+        rating=rating, content=content, movie_id=movie_id, username=username
+    )
+
+    movie.reviews.append(review)
+    user.reviews.append(review)
+
+    db.session.add(review)
+    db.session.commit()
+
+    return flask.redirect("/")
 
 
 # The following runs for me locally, but if there are issues you can

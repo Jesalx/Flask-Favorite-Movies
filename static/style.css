@@ -48,14 +48,14 @@ a {
     font-style: italic;
 }
 
-.login_field {
+.login_field, .review_field {
     width: auto;
     padding: 6px 8px;
     border-radius: 4px;
 
 }
 
-.login_submit {
+.login_submit, .review_submit {
     background-color: white;
     border: none;
     width: auto;
@@ -67,7 +67,13 @@ a {
     padding: 2%;
 }
 
-input {
+input, textarea {
     font-family: monospace;
     font-size: medium;
+}
+
+.invisible_input {
+    visibility: hidden;
+    width: 0;
+    height: 0;
 }
