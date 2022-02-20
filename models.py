@@ -11,11 +11,11 @@ from flask_login import UserMixin
 db = SQLAlchemy()
 
 
-class User(db.Model, UserMixin):
+class Account(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(128), unique=True)
     password = db.Column(db.String(128))
-    reviews = db.relationship("Review", backref="user", lazy=True)
+    reviews = db.relationship("Review", backref="account", lazy=True)
 
 
 # TODO: Follow advice from https://stackoverflow.com/a/16434931
@@ -35,4 +35,4 @@ class Review(db.Model):
     content = db.Column(db.String(512), nullable=True)
     movie_id = db.Column(db.Integer, db.ForeignKey("movie.id"))
     username = db.Column(db.String(128))
-    user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+    account_id = db.Column(db.Integer, db.ForeignKey("account.id"))
