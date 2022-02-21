@@ -5,7 +5,7 @@ function meetsSignupConditions() {
     let err_msg = document.getElementById("messages");
 
     if (username.length === 0 || password.length === 0 || repassword.length === 0) {
-        err_msg.innerText = "Please fill in all fields."
+        err_msg.innerText = "Please fill in all fields.";
         return false;
     }
 
@@ -14,7 +14,7 @@ function meetsSignupConditions() {
     const username_re = /^[0-9a-zA-Z]+$/;
     if (!username.match(username_re)) {
         err_msg.innerText = "Username may only contain alphanumeric characters.";
-        return false
+        return false;
     }
 
     const password_re = /^[0-9a-zA-Z!@#$]+$/
@@ -24,27 +24,27 @@ function meetsSignupConditions() {
     }
 
     if (username.length > 32) {
-        err_msg.innerText = "Username must be 32 or less characters."
+        err_msg.innerText = "Username must be 32 or less characters.";
         return false;
     }
 
     if (password.length <= 4) {
-        err_msg.innerText = "Password must be 5 or more characters."
+        err_msg.innerText = "Password must be 5 or more characters.";
         return false;
     }
 
     if (password.length > 128) {
-        err_msg.innerText = "Password must be 128 or less characters."
+        err_msg.innerText = "Password must be 128 or less characters.";
         return false;
     }
 
     if (password !== repassword) {
-        err_msg.innerText = "Passwords must match."
+        err_msg.innerText = "Passwords must match.";
         return false;
     }
 
     if (username === password) {
-        err_msg.innerText = "Username and password must not match."
+        err_msg.innerText = "Username and password must not match.";
         return false;
     }
 
