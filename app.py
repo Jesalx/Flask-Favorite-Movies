@@ -6,9 +6,10 @@ This file usees the Flask framework to create a flask app
 that will contain some basic information related to a randomly
 selected movie and a poster associated with the movie.
 """
-import os  # pylint: disable=unused-import
+# pylint: disable=missing-function-docstring
+# pylint: disable=no-member
+import os
 import flask
-from flask_sqlalchemy import SQLAlchemy
 from flask_login import (
     LoginManager,
     login_user,
@@ -50,7 +51,6 @@ def main():  # pylint: disable=missing-function-docstring
     movie = Movie.query.filter_by(tmdb_id=movie_info["id"]).first()
     if movie:
         movie_reviews = movie.reviews
-        print(type(movie_reviews))
         movie_average_rating = movie.get_average_rating()
 
     return flask.render_template(
@@ -143,14 +143,14 @@ def review_post():
         db.session.add(movie)
         db.session.commit()
 
-    review = Review(
+    user_review = Review(
         rating=rating, content=content, movie_id=movie_id, username=username
     )
 
-    movie.reviews.append(review)
-    current_user.reviews.append(review)
+    movie.reviews.append(user_review)
+    current_user.reviews.append(user_review)
 
-    db.session.add(review)
+    db.session.add(user_review)
     db.session.commit()
 
     return flask.redirect("/")
