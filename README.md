@@ -18,7 +18,7 @@ Once you have the repository downloaded you will need to do a couple of things. 
 
 ```touch .env```
 
-or another method of your choice. Inside this file should be a three lines in the following format
+or another method of your choice. Inside this file should be three lines in the following format
 
 ```text
 TMDB_KEY = "YOUR_TMDB_API_KEY"
@@ -49,6 +49,6 @@ Once you have all of the packages downloaded you are able to run the app with
 
 ## Future Improvements
 
-- I think that an interesting future improvement would be to split the webpage into thirds and have a different movie's information populate each third of the page. A cool extension of this feature would be that if the page is wide enough more movies will be loaded and if the page shrinks then the page will also lower the amount of movies shown.
 - I think one important future improvement will be having the average rating of the movie be calculated using only the latest review per user. The way that it currently works is that every review, regardless of who posted it, is counted equally.
 - I think another future improvement would be a small search bar at the top which would allow you to search a movie through the tmdb API. It would take the API information and display some links that the user could select and then load the milestone 2 page for that movie.
+- I think that an interesting future improvement would be to split the webpage into thirds and have a different movie's information populate each third of the page. A cool extension of this feature would be that if the page is wide enough more movies will be loaded and if the page shrinks then the page will also lower the amount of movies shown.
