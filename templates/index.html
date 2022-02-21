@@ -46,6 +46,9 @@
         <br>
         <h3>Reviews</h3>
         {% if movie_reviews %}
+        <div class="rating_info">
+            Average rating of {{movie_average_rating}} out of {{movie_reviews | length}} rating(s).
+        </div>
         <ul class="reviews">
             {% for review in movie_reviews %}
             <li class="review_item">

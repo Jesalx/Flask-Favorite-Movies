@@ -46,9 +46,12 @@ def load_user(user_id):
 def main():  # pylint: disable=missing-function-docstring
     movie_info = tmdb.get_random_favorite_movie()
     movie_reviews = []
+    movie_average_rating = 0
     movie = Movie.query.filter_by(tmdb_id=movie_info["id"]).first()
     if movie:
         movie_reviews = movie.reviews
+        print(type(movie_reviews))
+        movie_average_rating = movie.get_average_rating()
 
     return flask.render_template(
         "index.html",
@@ -61,6 +64,7 @@ def main():  # pylint: disable=missing-function-docstring
         movie_poster_url=movie_info["poster_url"],
         movie_wiki_url=movie_info["wiki_url"],
         movie_reviews=movie_reviews,
+        movie_average_rating=movie_average_rating,
     )
 
 
@@ -129,7 +133,7 @@ def review():
 def review_post():
     username = current_user.username
     movie_id = flask.request.form.get("movie_id")
-    rating = flask.request.form.get("review_rating")
+    rating = int(float(flask.request.form.get("review_rating")))
     content = flask.request.form.get("review_content").strip()
 
     movie = Movie.query.filter_by(tmdb_id=movie_id).first()

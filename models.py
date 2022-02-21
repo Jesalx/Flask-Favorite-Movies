@@ -18,15 +18,22 @@ class Account(db.Model, UserMixin):
     reviews = db.relationship("Review", backref="account", lazy=True)
 
 
-# TODO: Follow advice from https://stackoverflow.com/a/16434931
-# and see if using that information works for this method. We
-# would like to be able to attach a review to both a person and
-# a movie so that later on we could make a user profile page where
-# they can see all of their reviews.
+# How to use a relationship once it's in the model from:
+# https://stackoverflow.com/a/16434931
 class Movie(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     tmdb_id = db.Column(db.Integer)
     reviews = db.relationship("Review", backref="movie", lazy=True)
+
+    def get_average_rating(self):
+        if self.reviews:
+            review_sum = 0
+            for review in self.reviews:
+                review_sum += review.rating
+            average = review_sum / len(self.reviews)
+            return round(average, 2)
+        else:
+            return 0
 
 
 class Review(db.Model):
