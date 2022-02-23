@@ -8,7 +8,7 @@ One of the most useful resources for this milestone was [Flask-login: Lengthy ex
 
 This project differed from my project planning in a couple key ways. There were a lot of small details that I missed during planning that become clear when working on the project. For example, when writing the login page the user could enter a 1000 length string as the username which would result in an error page because I had set the string limit in the model to be 128. There were a lot of little issues like this which had to be fixed that I hadn't prepared for during project planning.
 
-The project is hosted on Heroku and can be found at [PUT_URL_HERE]
+The project is hosted on Heroku and can be found at [Heroku_URL](http://powerful-thicket-45733.herokuapp.com/)
 
 ## Installation Instructions
 
