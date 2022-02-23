@@ -28,6 +28,8 @@ https://www.w3schools.com/css/css_navbar_horizontal.asp */
 
 .main {
     padding: 2%;
+    padding-top: 36px;
+    text-align: center;
 }
 
 img {
@@ -65,6 +67,7 @@ a {
 
 .login {
     padding: 2%;
+    text-align: center;
 }
 
 input, textarea {
