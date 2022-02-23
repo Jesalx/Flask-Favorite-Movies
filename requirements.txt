@@ -1,6 +1,6 @@
 Flask
+Flask-Login
+Flask-SQLAlchemy
 requests
 python-dotenv
 Werkzeug
-flask-login
-Flask-SQLAlchemy
