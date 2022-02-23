@@ -23,7 +23,10 @@ from models import db, Account, Movie, Review
 
 app = flask.Flask(__name__)
 app.config["SEND_FILE_MAX_AGE_DEFAULT"] = 0
-app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")
+DB_URL = os.getenv("DATABASE_URL")
+if DB_URL.startswith("postgres://"):
+    DB_URL = DB_URL.replace("postgres", "postgresql")
+app.config["SQLALCHEMY_DATABASE_URI"] = DB_URL
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
 
