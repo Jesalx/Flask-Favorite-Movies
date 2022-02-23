@@ -1,6 +1,6 @@
 Flask
 Flask-Login
-Flask-SQLAlchemy
+Flask-SQLAlchemy==2.1
 requests
 python-dotenv
 Werkzeug
