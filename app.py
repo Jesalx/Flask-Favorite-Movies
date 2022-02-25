@@ -73,6 +73,8 @@ def main():  # pylint: disable=missing-function-docstring
 
 @app.route("/signup", methods=["GET"])
 def signup():
+    if current_user.is_authenticated:
+        return flask.redirect("/")
     return flask.render_template("signup.html")
 
 
@@ -100,6 +102,8 @@ def signup_post():
 
 @app.route("/login", methods=["GET"])
 def login():
+    if current_user.is_authenticated:
+        return flask.redirect("/")
     return flask.render_template("login.html")
 
 
