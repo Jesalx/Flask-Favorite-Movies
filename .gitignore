@@ -1,2 +1,13 @@
 .env
 __pycache__/
+
+.parcel-cache/
+node_modules/
+
+/static/js/
+
+.DS_Store
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

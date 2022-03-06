@@ -163,10 +163,16 @@ def review_post():
     return flask.redirect("/")
 
 
+@app.route("/profile", methods=["GET"])
+@login_required
+def profile():
+    return flask.render_template("profile.html")
+
+
 # The following runs for me locally, but if there are issues you can
 # also try: "app.run(debug=True)" without the host and port parameters
-app.run(
-    host=os.getenv("IP", "0.0.0.0"),
-    port=int(os.getenv("PORT", 8080)),  # pylint: disable=invalid-envvar-default
-    debug=True,
-)
+# app.run(
+#     host=os.getenv("IP", "0.0.0.0"),
+#     port=int(os.getenv("PORT", 8080)),  # pylint: disable=invalid-envvar-default
+#     debug=True,
+# )

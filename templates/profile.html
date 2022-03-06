@@ -1,0 +1,19 @@
+<html>
+
+    <head>
+        <link rel="stylesheet" href="/static/style.css" />
+        <script defer src="/static/js/index.js"></script>
+    </head>
+
+    <body>
+        <ul class="navbar">
+            <li><a class="navbar_item" href="{{ url_for('logout')}}">logout</a></li>
+            <li><a class="navbar_item username" href="{{url_for('main')}}">movies</a></li>
+        </ul>
+
+        <div class="main">
+            <div id="react"></div>
+        </div>
+    </body>
+
+</html>
