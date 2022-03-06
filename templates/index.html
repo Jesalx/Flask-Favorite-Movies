@@ -1,68 +1,68 @@
 <html>
 
-<head>
-    <link rel="stylesheet" href="/static/style.css" />
-</head>
+    <head>
+        <link rel="stylesheet" href="/static/style.css" />
+    </head>
 
-<body>
-    <ul class="navbar">
-        <li><a class="navbar_item" href="{{ url_for('logout')}}">logout</a></li>
-        <li><a class="navbar_item username" href="">{{username}}</a></li>
-    </ul>
-    <div class="main">
-        <p>
-        <div class="movie_title">
-            <h1>{{movie_title}} </h1>
-        </div>
-        <div class="movie_tagline">
-            {{movie_tagline}}
-        </div> <br />
-        <div class="movie_description">
-            {{movie_description}}
-        </div> <br />
-        <div class="movie_genres">
-            {{", ".join(movie_genres)}} <br />
-        </div> <br />
-        <div class="movie_poster_img"><img src="{{movie_poster_url}}" alt="{{movie_title}}"></div>
-        <div class="movie_wiki_url">
-            <a href="{{movie_wiki_url}}">{{movie_wiki_url}}</a>
-        </div>
-        </p>
-
-        <div class="review_title">
-            <h3>Write a review:</h3>
-            <form method="POST" action="/review">
-                Rating (0-10): <input type="number" class="review_field" id="review_rating" name="review_rating" min="0"
-                    max="10" value="10">
-                <input class="invisible_input" type="number" value="{{movie_id}}" name="movie_id" readonly>
-                <br>
-                <textarea class="review_field" rows="4" cols="50" id="review_content" name="review_content"
-                    placeholder="Write a review." maxlength="512"></textarea>
-                <br>
-                <input class="review_submit" type="submit" value="Submit Review">
-            </form>
-        </div>
-
-        <br>
-        <h3>Reviews</h3>
-        {% if movie_reviews %}
-        <div class="rating_info">
-            Average rating of {{movie_average_rating}} out of {{movie_reviews | length}} rating(s).
-        </div>
-        <ul class="reviews">
-            {% for review in movie_reviews %}
-            <li class="review_item">
-                <b>{{review.username}}</b> rated the movie {{review.rating}}/10<br>
-                {% if review.content %}
-                <div class="review_content">{{review.content}}</div>
-                {% endif %}
-            </li>
-            {% endfor %}
+    <body>
+        <ul class="navbar">
+            <li><a class="navbar_item" href="{{ url_for('logout')}}">logout</a></li>
+            <li><a class="navbar_item username" href="{{url_for('profile')}}">{{username}}</a></li>
         </ul>
-        {% else %}
-        No reviews yet. Write a review.
-        {% endif %}
-    </div>
-</body>
+        <div class="main">
+            <p>
+            <div class="movie_title">
+                <h1>{{movie_title}} </h1>
+            </div>
+            <div class="movie_tagline">
+                {{movie_tagline}}
+            </div> <br />
+            <div class="movie_description">
+                {{movie_description}}
+            </div> <br />
+            <div class="movie_genres">
+                {{", ".join(movie_genres)}} <br />
+            </div> <br />
+            <div class="movie_poster_img"><img src="{{movie_poster_url}}" alt="{{movie_title}}"></div>
+            <div class="movie_wiki_url">
+                <a href="{{movie_wiki_url}}">{{movie_wiki_url}}</a>
+            </div>
+            </p>
+
+            <div class="review_title">
+                <h3>Write a review:</h3>
+                <form method="POST" action="/review">
+                    Rating (0-10): <input type="number" class="review_field" id="review_rating" name="review_rating"
+                        min="0" max="10" value="10">
+                    <input class="invisible_input" type="number" value="{{movie_id}}" name="movie_id" readonly>
+                    <br>
+                    <textarea class="review_field" rows="4" cols="50" id="review_content" name="review_content"
+                        placeholder="Write a review." maxlength="512"></textarea>
+                    <br>
+                    <input class="review_submit" type="submit" value="Submit Review">
+                </form>
+            </div>
+
+            <br>
+            <h3>Reviews</h3>
+            {% if movie_reviews %}
+            <div class="rating_info">
+                Average rating of {{movie_average_rating}} out of {{movie_reviews | length}} rating(s).
+            </div>
+            <ul class="reviews">
+                {% for review in movie_reviews %}
+                <li class="review_item">
+                    <b>{{review.username}}</b> rated the movie {{review.rating}}/10<br>
+                    {% if review.content %}
+                    <div class="review_content">{{review.content}}</div>
+                    {% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            No reviews yet. Write a review.
+            {% endif %}
+        </div>
+    </body>
 
 </html>
