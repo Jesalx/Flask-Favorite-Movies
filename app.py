@@ -184,6 +184,28 @@ def get_user_reviews():
     return flask.jsonify(review_content)
 
 
+@app.route("/modify_reviews", methods=["POST"])
+@login_required
+def modify_reviews():
+    reviews = flask.request.json
+    all_user_reviews = Review.query.filter_by(username=current_user.username).all()
+    still_existing_reviews = set()
+    for user_review in reviews:
+        # The first thing we want to do is find the review
+        # that represents this current object
+        actual_review = Review.query.filter_by(id=user_review["review_id"]).first()
+        still_existing_reviews.add(user_review["review_id"])
+        actual_review.rating = user_review["rating"]
+
+    for previous_review in all_user_reviews:
+        review_id = previous_review.id
+        if review_id not in still_existing_reviews:
+            Review.query.filter_by(id=review_id).delete()
+
+    db.session.commit()
+    return flask.Response(status=200)
+
+
 # The following runs for me locally, but if there are issues you can
 # also try: "app.run(debug=True)" without the host and port parameters
 # app.run(
