@@ -7,12 +7,10 @@ function App() {
 
 
     useEffect(() => {
-        // setReviews()
         fetch('/user_reviews')
             .then(response => response.json())
             .then(data => {
                 setReviews(data)
-                console.log(reviews)
             })
     }, [])
 
@@ -24,6 +22,7 @@ function App() {
             }
         }
         setReviews(newReviews)
+        changeMessage("")
     }
 
     function handleChange(reviewId, newValue){
@@ -38,10 +37,12 @@ function App() {
             }
         }
         setReviews(newReviews)
+        changeMessage("")
     }
 
+
+
     function saveReviews(){
-        console.log(reviews)
         fetch('/modify_reviews', {
             method: 'POST',
             headers: {
@@ -49,7 +50,7 @@ function App() {
             },
             body: JSON.stringify(reviews)
         });
-        console.log("done?")
+        changeMessage("Saved.")
     }
 
     function createReview(reviewObj) {
@@ -64,13 +65,19 @@ function App() {
         />
     }
 
+    function changeMessage(newMessage){
+        const div = document.getElementById('message');
+        div.textContent = newMessage;
+    }
+
     return (
         <div className="App">
             <h2>User Reviews</h2>
-            <ul>
+            <ul className="review_list">
                 {reviews.map(review => createReview(review))}
             </ul>
             <button type="button" onClick={() => saveReviews()}>Save</button>
+            <div id="message"></div>
         </div>
     );
 }
