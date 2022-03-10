@@ -26,9 +26,13 @@ Now that you have the right items inside of `.env` in the correct format you'll 
 
 ```pip install -r requirements.txt```
 
+To install the required npm packages you can run the command
+
+```npm install```
+
 Once you have all of the packages downloaded you are able to run the app with
 
-```python3 app.py```
+```npm run start```
 
 ## Hardest Part
 
