@@ -1,6 +1,8 @@
 # Milestone 3
 
-TODO: Add description
+This milestone focuses on having React communicate with a flask server to add client-side logic to the web app.
+
+To get to the new react page created for this milestone you click the button in the upper-right corner of the root page (default page that loads random movies) that has your username in it.
 
 ## Installation Instructions
 
@@ -28,10 +30,15 @@ Once you have all of the packages downloaded you are able to run the app with
 
 ```python3 app.py```
 
+## Hardest Part
+
+The hardest part of this assignment for me was handling the relationship between React components. It still doesn't make complete sense to me what the best way to handle data and functionality for React components is, even after completing the milestone. I think that this is just something that I have to work more with outside of class so that I can be exposed to the ideas behind it longer.
+
 ## Technical Issues
 
-- One issue that I encountered during this milestone was an issue with the database where I would go look at the tables and the user table would have a single item in it no matter how many user accounts I had added to the database. Everything still worked when querying for users in app.py but when querying manually I would just find the one element which was the same as the table owner. After googling `postgresql user table` I found a few stackoverflow results saying that I shouldn't name my table user because it's reserved. I renamed the user model to account which fixed the issue.
-- Another technical issue that I encountered during this milestone was using the input HTML tag with `type="number"`. When the user would use the provided up-down arrows to choose an integer, or enter an integer themselves everything would work fine. If they decided to enter something like 4.0 then we would get an error page because I was giving the input directly to the table which didn't like the float. The html was preventing input like 4.1 or 4.8939, but it would be happy taking 4.0. At first I was going to implement javascript to check the input before submission, but was frustrated that there wasn't a more simple solution. Eventually I realized that it was be much simpler to typecast the string to a float then to an integer.
+- One issue that I encountered during this milestone was sending my modified json back to the flask server once the user had made their changes. At first I tried to make an html form button that sent the request itself, but it didn't work properly for many reasons. One of those reasons being that it would reload the page even when the required behavior is that it doesn't do that. After not getting anywhere with that it made more sense to make a button in the react app that would just run a function that sent the request using fetch, especially since this function would be able to directly access the updated state of reviews easily.
+- One issue that I encountered during this milestone was using `useState()` to properly maintain the user's reviews and change them when the user deleted or modified the rating. Initially, I tried to pass down functions as props that would manually change one review item in the array, but this ended up not working. It was also quite difficult for me to wrap my head around what functions I wanted to send down to my review component and what exactly they should do. After looking back at the tic-tac-toe example I decided to scrap everything I was doing with trying to change individual reviews and created a `handleDelete(review_id)` and `handleChange(reviewId, newValue)` function which worked similarly to the tic-tac-toe example and passed those down as props.
+- One issue that I encountered during this milestone was using fetch properly to receive the json data from my flask server. My original attempt involved creating a new async function and using the await keyweyword instead of using `.then()` like the milestone 3 example used. I had a lot of issues with this where even though I was using await to ensure completion before the next step there were issues were various issues where the function wouldn't return the expected values. I ended up solving this by reevaluating whether I wanted to continue the function I was currently doing or move to a method more similar to the milestone example. I ended up following what the milestone example did for this issue which worked better.
 
 ## Known Problems
 
