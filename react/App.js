@@ -42,6 +42,14 @@ function App() {
 
     function saveReviews(){
         console.log(reviews)
+        fetch('/modify_reviews', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(reviews)
+        });
+        console.log("done?")
     }
 
     function createReview(reviewObj) {
