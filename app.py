@@ -169,6 +169,21 @@ def profile():
     return flask.render_template("profile.html")
 
 
+@app.route("/user_reviews")
+@login_required
+def get_user_reviews():
+    review_content = []
+    for movie_review in current_user.reviews:
+        curr_review = {}
+        curr_review["review_id"] = movie_review.id
+        curr_review["rating"] = movie_review.rating
+        curr_review["content"] = movie_review.content
+        curr_review["movie_id"] = movie_review.movie_id
+        review_content.append(curr_review)
+
+    return flask.jsonify(review_content)
+
+
 # The following runs for me locally, but if there are issues you can
 # also try: "app.run(debug=True)" without the host and port parameters
 # app.run(
