@@ -36,7 +36,7 @@ Once you have all of the packages downloaded you are able to run the app with
 
 ## Hardest Part
 
-The hardest part of this assignment for me was handling the relationship between React components. It still doesn't make complete sense to me what the best way to handle data and functionality for React components is, even after completing the milestone. I think that this is just something that I have to work more with outside of class so that I can be exposed to the ideas behind it longer.
+The hardest part of this assignment for me was handling the relationship between React components. It was pretty difficult at first for me to wrap my head around the way we need to pass down functions to our components using props and how the function we passed down should interact with its parent component. I would say that struggling with this concept was particularly valuable because painstakingly finding a method that worked finally let the concept sink in.
 
 ## Technical Issues
 
