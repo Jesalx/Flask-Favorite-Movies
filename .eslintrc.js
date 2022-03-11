@@ -19,5 +19,5 @@ module.exports = {
   ],
   rules: {
   },
-  ignorePatterns: ['**/>static/js</*.js'],
+  ignorePatterns: ['static/js/*'],
 };
