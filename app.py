@@ -6,7 +6,6 @@ This file usees the Flask framework to create a flask app
 that will contain some basic information related to a randomly
 selected movie and a poster associated with the movie.
 """
-# pylint: disable=missing-function-docstring
 # pylint: disable=no-member
 import os
 import flask
@@ -41,13 +40,17 @@ login_manager.init_app(app=app)
 
 
 @login_manager.user_loader
-def load_user(user_id):
+def load_user(user_id):  # pylint: disable=missing-function-docstring
     return Account.query.get(int(user_id))
 
 
 @app.route("/")
 @login_required
-def main():  # pylint: disable=missing-function-docstring
+def main():
+    """
+    This route is the main page for the entire application. This route
+    will load movie/review information related to a random movie.
+    """
     movie_info = tmdb.get_random_favorite_movie()
     movie_reviews = []
     movie_average_rating = 0
@@ -73,6 +76,11 @@ def main():  # pylint: disable=missing-function-docstring
 
 @app.route("/signup", methods=["GET"])
 def signup():
+    """
+    This route is the signup page for the applicaton. The user may only
+    access this page if they are not currently logged in. If the user is
+    logged in then they will be taken to the main page of the application.
+    """
     if current_user.is_authenticated:
         return flask.redirect("/")
     return flask.render_template("signup.html")
@@ -80,6 +88,12 @@ def signup():
 
 @app.route("/signup", methods=["POST"])
 def signup_post():
+    """
+    This route accepts a post from the signup page to attempt to create a
+    new user. If the username already exists then we flash a message to the
+    user and refresh the page, otherwise we make create the user and redirect
+    them to the login page.
+    """
     username = flask.request.form.get("username").lower()
     password = flask.request.form.get("password")
 
@@ -102,6 +116,11 @@ def signup_post():
 
 @app.route("/login", methods=["GET"])
 def login():
+    """
+    This route is the login page for the application. The user may only
+    access this page if they are not logged in. If the user is logged in
+    then they will be taken to the main page of the application.
+    """
     if current_user.is_authenticated:
         return flask.redirect("/")
     return flask.render_template("login.html")
@@ -109,6 +128,12 @@ def login():
 
 @app.route("/login", methods=["POST"])
 def login_post():
+    """
+    This route accepts a post from the login page to attempt to sign in the
+    user based on their username and password. If the user has entered a
+    valid username/password combo then they are logged in, otherwise they
+    are flashed a message notifying them and the page is refreshed.
+    """
     username = flask.request.form.get("username").lower()
     password = flask.request.form.get("password")
 
@@ -125,19 +150,21 @@ def login_post():
 @app.route("/logout", methods=["GET"])
 @login_required
 def logout():
+    """
+    This route logs out the user and redirects them to the login page.
+    """
     logout_user()
     return flask.redirect("/login")
-
-
-@app.route("/review", methods=["GET"])
-@login_required
-def review():
-    return flask.redirect("/")
 
 
 @app.route("/review", methods=["POST"])
 @login_required
 def review_post():
+    """
+    This route accepts a post from the main page containing information
+    related to a user written review. We create a review from the user
+    with the specified information and then reload the main page.
+    """
     username = current_user.username
     movie_id = flask.request.form.get("movie_id")
     rating = int(float(flask.request.form.get("review_rating")))
@@ -166,12 +193,22 @@ def review_post():
 @app.route("/profile", methods=["GET"])
 @login_required
 def profile():
+    """
+    This route is the profile page for the currently logged in user. The
+    page currently uses React to load the user's written reviews and allow
+    them to modify their rating or delete comments.
+    """
     return flask.render_template("profile.html")
 
 
 @app.route("/user_reviews")
 @login_required
 def get_user_reviews():
+    """
+    This route returns json data related to the currently logged in user's
+    written reviews. The current use of this route is to send json data to
+    a React webpage that will use the data to load the user's reviews.
+    """
     review_content = []
     for movie_review in current_user.reviews:
         curr_review = {}
@@ -187,6 +224,14 @@ def get_user_reviews():
 @app.route("/modify_reviews", methods=["POST"])
 @login_required
 def modify_reviews():
+    """
+    This route accepts a post containing json related to the user's modified
+    review information. It loads all of the user's current reviews and
+    finds the reviews to modify using the review_id and modifies the actual
+    reviews to reflect any changes made. It keeps track of the reviews that
+    still exist in the modified reviews so that it can find the reviews that
+    have been deleted and remove them.
+    """
     reviews = flask.request.json
     user_reviews = Review.query.filter_by(username=current_user.username).all()
     still_existing_reviews = set()
