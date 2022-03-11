@@ -42,15 +42,19 @@ function App() {
     changeMessage('');
   }
 
-  function saveReviews() {
-    fetch('/modify_reviews', {
+  async function saveReviews() {
+    const response = await fetch('/modify_reviews', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(reviews),
     });
-    changeMessage('Saved.');
+    if (response.ok) {
+      changeMessage('Changes saved!');
+    } else {
+      changeMessage('Something went wrong...');
+    }
   }
 
   function createReview(reviewObj) {
