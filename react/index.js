@@ -1,12 +1,12 @@
-/* eslint-disable */
+/* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 
 const app = document.getElementById('react');
 ReactDOM.render(
-    <React.StrictMode>
-        <App />
-    </React.StrictMode>,
-    app,
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  app,
 );
