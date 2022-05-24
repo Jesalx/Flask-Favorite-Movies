@@ -1,5 +1,5 @@
 """
-Milestone 2 - Main flask app
+Main flask app
 Jpatel152@student.gsu.edu
 
 This file usees the Flask framework to create a flask app
